@@ -74,7 +74,7 @@ func resourceCloudStackNetwork() *schema.Resource {
 
 			"cidr": {
 				Type:     schema.TypeString,
-				Required: true,
+				Optional: true,
 				ForceNew: true,
 			},
 
@@ -190,10 +190,11 @@ func resourceCloudStackNetworkCreate(d *schema.ResourceData, meta interface{}) e
 		return err
 	}
 
-	m, err := parseCIDR(d, no.Specifyipranges)
-	if err != nil {
-		return err
-	}
+	if _, ok := d.GetOk("cidr"); ok {
+		m, err := parseCIDR(d, no.Specifyipranges)
+		if err != nil {
+			return err
+		}
 
 	// Set the needed IP config
 	p.SetGateway(m["gateway"])
