@@ -196,18 +196,19 @@ func resourceCloudStackNetworkCreate(d *schema.ResourceData, meta interface{}) e
 			return err
 		}
 
-	// Set the needed IP config
-	p.SetGateway(m["gateway"])
-	p.SetNetmask(m["netmask"])
+		// Set the needed IP config
+		p.SetGateway(m["gateway"])
+		p.SetNetmask(m["netmask"])
 
-	// Only set the start IP if we have one
-	if startip, ok := m["startip"]; ok {
-		p.SetStartip(startip)
-	}
+		// Only set the start IP if we have one
+		if startip, ok := m["startip"]; ok {
+			p.SetStartip(startip)
+		}
 
-	// Only set the end IP if we have one
-	if endip, ok := m["endip"]; ok {
-		p.SetEndip(endip)
+		// Only set the end IP if we have one
+		if endip, ok := m["endip"]; ok {
+			p.SetEndip(endip)
+		}
 	}
 
 	// Set the network domain if we have one
